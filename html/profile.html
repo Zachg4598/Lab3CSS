@@ -1,3 +1,5 @@
+{% import time %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +40,15 @@
 <body>
     <div class="profile-container">
         <h1>User Profile</h1>
+        <form action="/profile/{{ user_login }}" method="post" enctype="multipart/form-data">
+            <label for="real_name">Real Name:</label>
+            <input type="text" id="real_name" name="real_name" value="{{ user_profile['Real Name'] }}"><br>
+            <label for="dob">Date of Birth:</label>
+            <input type="text" id="dob" name="dob" value="{{ user_profile['DOB'] }}"><br>
+            <label for="profile_picture">Profile Picture:</label>
+            <input type="file" id="profile_picture" name="profile_picture"><br>
+            <input type="submit" value="Update Profile">
+        </form>
         <ul>
             <li><strong>Real Name:</strong> {{ user_profile["Real Name"] }}</li>
             <li><strong>Login:</strong> {{ user_login }}</li>
@@ -45,6 +56,6 @@
             <li><strong>Email:</strong> {{ user_profile["email"] }}</li>
         </ul>
     </div>
-    <img src="{{ user_login }}.png" alt="{{ user_login }}'s Profile Picture">
+    <img src="/images/{{ user_login }}.png?{{ time.time() }}" alt="{{ user_login }}'s Profile Picture">
 </body>
 </html>
